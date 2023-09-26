@@ -34,7 +34,7 @@ Como um dos aspectos mais importante durante o desenvolvimento de software, fiz 
 Para verificar o comportamento das unidades na aplicação e manter um desenvolvimento conciso e com maior quantidade de tratamento de erros e exceções apliquei testes unitários utilizando mocks para não criar dependência de dados externos.
 
 
-# [Como Utilizo o Projeto?](#sobre)
+# Como Utilizo o Projeto?
 
 - Clone o projeto.
 - Adquira duas credenciais para acesso ao WordsApi, acesse o site para instruções de como fazer.
@@ -46,7 +46,7 @@ Para verificar o comportamento das unidades na aplicação e manter um desenvolv
   - `flutter run`
 
 
-# [Obrigatórios](#sobre)
+# Obrigatórios
 
 - [x] Como usuário, devo ser capaz de visualizar uma lista de palavras com rolagem infinita
 - [x] Como usuário, devo ser capaz de visualizar uma palavra, significados e a fonética
