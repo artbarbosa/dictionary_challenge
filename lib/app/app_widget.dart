@@ -29,6 +29,7 @@ class AppState extends State<AppWidget> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorSchemeSeed: AppColors.primary,
         textTheme: GoogleFonts.robotoTextTheme(),

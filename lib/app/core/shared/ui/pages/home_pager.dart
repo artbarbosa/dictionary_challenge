@@ -11,21 +11,24 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: CustomTabView(
-        tabs: [
-          CustomTabData(
-            label: 'Word List',
-            child: WordListPage(),
-          ),
-          CustomTabData(
-            label: 'History',
-            child: HistoryPage(),
-          ),
-          CustomTabData(
-            label: 'Favorites',
-            child: FavoritePage(),
-          ),
-        ],
+      body: SafeArea(
+        bottom: false,
+        child: CustomTabView(
+          tabs: [
+            CustomTabData(
+              label: 'Word List',
+              child: WordListPage(),
+            ),
+            CustomTabData(
+              label: 'History',
+              child: HistoryPage(),
+            ),
+            CustomTabData(
+              label: 'Favorites',
+              child: FavoritePage(),
+            ),
+          ],
+        ),
       ),
     );
   }

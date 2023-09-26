@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import '../../../shared/consts/api_consts.dart';
 import '../../../shared/consts/file_consts.dart';
 import '../../../shared/errors/failures.dart';
 import '../../../shared/services/remote/http_client_service_interface.dart';
@@ -60,62 +62,62 @@ class WordDataSource implements IWordDataSource {
     return linesInRange;
   }
 
-  // @override
-  // Future<WordModel> getWord(String word) async {
-  //   if (word.isEmpty) {
-  //     throw ArgumentFailure(
-  //         message: 'Start line must be less than or equal to end line');
-  //   }
-  //   final url = Uri.parse(ApiConst.apiUrl(word));
-
-  //   final headers = {
-  //     'X-RapidAPI-Key': dotenv.env['KEY'] ?? '',
-  //     'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com',
-  //   };
-
-  //   try {
-  //     final response = await client.get(url, headers: headers);
-  //     final data = jsonDecode(response.body);
-  //     return WordModel.fromApiJson(data);
-  //   } on SocketException catch (error) {
-  //     throw ApiFailure(message: error.toString(), code: 500);
-  //   } catch (error) {
-  //     throw GenericFailure(message: error.toString());
-  //   }
-  // }
-
   @override
   Future<WordModel> getWord(String word) async {
     if (word.isEmpty) {
-      throw ArgumentFailure(
-          message: 'Start line must be less than or equal to end line');
+      throw ArgumentFailure(message: 'Word is Empty');
     }
-    // final url = Uri.parse(ApiConst.apiUrl(word));
-    final url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
+    final url = Uri.parse(ApiConst.apiUrl(word));
 
     final headers = {
-      // 'X-RapidAPI-Key': dotenv.env['RAPIDAPI_KEY'] ?? '',
-      // 'X-RapidAPI-Key': '651b21c5acmsh150d16d65b04af0p185e39jsnf66920b75083',
+      'X-RapidAPI-Key': dotenv.env['KEY'] ?? '',
       'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com',
     };
 
     try {
       final response = await client.get(url, headers: headers);
-
-      if (response.statusCode == 200 || true) {
-        // final data = jsonDecode(response.body);
-        final data = jsonDecode(responseBody);
-        return WordModel.fromApiJson(data);
-      }
-      // else {
-      //   throw ApiFailure(message: response.body, code: response.statusCode);
-      // }
+      final data = jsonDecode(response.body);
+      return WordModel.fromApiJson(data);
     } on SocketException catch (error) {
       throw ApiFailure(message: error.toString(), code: 500);
     } catch (error) {
       throw GenericFailure(message: error.toString());
     }
   }
+
+  // MOCK DATA API
+  // @override
+  // Future<WordModel> getWord(String word) async {
+  //   if (word.isEmpty) {
+  //     throw ArgumentFailure(
+  //         message: 'Start line must be less than or equal to end line');
+  //   }
+  //   // final url = Uri.parse(ApiConst.apiUrl(word));
+  //   final url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
+
+  //   final headers = {
+  //     // 'X-RapidAPI-Key': dotenv.env['RAPIDAPI_KEY'] ?? '',
+  //     // 'X-RapidAPI-Key': '651b21c5acmsh150d16d65b04af0p185e39jsnf66920b75083',
+  //     'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com',
+  //   };
+
+  //   try {
+  //     final response = await client.get(url, headers: headers);
+
+  //     if (response.statusCode == 200 || true) {
+  //       // final data = jsonDecode(response.body);
+  //       final data = jsonDecode(responseBody);
+  //       return WordModel.fromApiJson(data);
+  //     }
+  //     // else {
+  //     //   throw ApiFailure(message: response.body, code: response.statusCode);
+  //     // }
+  //   } on SocketException catch (error) {
+  //     throw ApiFailure(message: error.toString(), code: 500);
+  //   } catch (error) {
+  //     throw GenericFailure(message: error.toString());
+  //   }
+  // }
 }
 
 const responseBody =
